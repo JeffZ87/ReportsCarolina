@@ -3,9 +3,9 @@ export default function Search() {
         const data = {
             term: '2022+Fall',
             subject: 'COMP',
-            catalogNumber: 455
+            catalogNumber: '455'
         };
-        const response = await fetch('/api/getCourses', {
+        const response = await fetch('/api/courses', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -20,7 +20,7 @@ export default function Search() {
 
     return (
         <div>
-            <button onClick={sendRequest}>Make API Call</button>
+            <button onClick={sendRequest}>Search for classes</button>
         </div>
     );
 }
