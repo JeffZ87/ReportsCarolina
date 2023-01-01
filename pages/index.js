@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Navbar from '../components/navbar/navbar'
 
 import Search from '../components/search/search'
+import MonitoredCourses from '../components/monitoredCourses/monitoredCourses';
 
 export default function Home() {
   return (
@@ -24,7 +25,7 @@ export default function Home() {
           </div>
 
           <div className='col-4 bg-success'>
-            tes
+            <MonitoredCourses />
           </div>
         </div>
       </div>
