@@ -1,7 +1,7 @@
 export default function Search() {
     const sendRequest = async () => {
         const data = {
-            term: '2022+Fall',
+            term: '2022 Fall',
             subject: 'COMP',
             catalogNumber: '455'
         };

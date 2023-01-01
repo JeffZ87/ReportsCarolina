@@ -48,7 +48,7 @@ export async function searchClasses(url, csrfToken, searchParameter) {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Cookie': 'csrftoken=' + csrfToken.csrfCookieToken
       },
-      body: `csrfmiddlewaretoken=${csrfToken.csrfMiddlewareToken}&term=${searchParameter.term}&subject=${searchParameter.subject}&catalog_number=${searchParameter.catalogNumber}&filter-submit=`
+      body: `csrfmiddlewaretoken=${csrfToken.csrfMiddlewareToken}&term=${searchParameter.term.replace(' ', '+')}&subject=${searchParameter.subject}&catalog_number=${searchParameter.catalogNumber}&filter-submit=`
   
     });
   
@@ -83,4 +83,11 @@ export async function searchClasses(url, csrfToken, searchParameter) {
     });
 
     return resultClasses
+}
+
+export async function updateClassStatus(url, queuedCourses) {
+    let csrfToken = getToken(url);
+    queuedCourses.forEach((course) => {
+        let classResults = searchClasses(url, csrfToken, )
+    });
 }
