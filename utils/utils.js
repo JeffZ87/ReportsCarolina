@@ -61,10 +61,10 @@ export async function searchClasses(url, csrfToken, searchParameter) {
     let classTrow = classTbody.querySelectorAll('tr');
     classTrow.forEach((row) => {
       let resultClass = {
-        classNumber: 0,
+        classNumber: '',
         subject: '',
-        catalogNumber: 0,
-        sectionNumber: 0,
+        catalogNumber: '',
+        sectionNumber: '',
         term: '',
         instructor: '',
         isClassOpen: false //if seats > 0 then class is open (true); false other wise
