@@ -32,4 +32,4 @@ yarn-error.log*
 .vercel
 
 # gmail credentials
-/utils/gmail.js
+utils/gmail.js
