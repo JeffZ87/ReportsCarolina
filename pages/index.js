@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Navbar from '../components/navbar/navbar'
-import Search from '../components/search/search'
+import Search from '../components/searchbar/searchbar'
 import MonitoredCourses from '../components/monitoredCourses/monitoredCourses'
 
 
