@@ -5,7 +5,7 @@ export default function handler(req, res) {
         case 'GET':
             res.status(200).json(queuedCourses);
             break;
-        case 'POST': 
+        case 'POST':
             let course = req.body;
             if (course.classNumber != null) {
                 queuedCourses.push(course);

@@ -5,7 +5,7 @@ export default function handler(req, res) {
         case 'GET':
             res.status(200).json(isCourseMonitoringOn);
             break;
-        
+
         case 'POST':
             if (isCourseMonitoringOn == false && req.body == 'true' && !isMonitoringCycleRunning) {
                 startClassMonitoring();
