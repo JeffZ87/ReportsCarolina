@@ -1,10 +1,24 @@
+import { useState } from "react";
+import Script from "next/script";
+
 export default function MonitoredCourses() {
+
+    const [isToggleDisabled, SetIsToggleDisabled] = useState(false);
+    
+    const [isMonitoringOn, setIsMonitoringOn] = useState(async () => {
+        SetIsToggleDisabled(true);
+        let response = await fetch('/api/monitor-status');
+        setIsMonitoringOn(await response.text() == 'true');
+        SetIsToggleDisabled(false);
+        
+    });
+    
     const getMonitoredCourses = async () => {
         let response = await fetch('/api/monitored-courses');
         response.json().then((res) => {
             console.log(res);
         });
-    }
+    };
 
     const deleteMonitoredCourses = async () => {
         let classNumber = '5675'
@@ -14,7 +28,7 @@ export default function MonitoredCourses() {
         response.json().then((res) => {
             console.log(res);
         });
-    }
+    };
 
     const addCourse = async () => {
         let course = {
@@ -37,13 +51,32 @@ export default function MonitoredCourses() {
         response.json().then((res) => {
             console.log(res);
         });
-    }
+    };
+
+    const onChange = async (state) => {
+        SetIsToggleDisabled(true);
+        let checked = state.target.checked;
+        let response = await fetch('/api/monitor-status', {
+            method: 'POST',
+            body: checked
+        });
+        console.log(await response.text());
+        setIsMonitoringOn(checked);
+        SetIsToggleDisabled(false);
+    };
+    
+
+
 
     return (
         <div>
             <button onClick={getMonitoredCourses}>monitored button</button>
             <button onClick={deleteMonitoredCourses}>delete button</button>
             <button onClick={addCourse}>add button</button>
+            <div className="form-check form-switch">
+                <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" onChange={onChange} checked={isMonitoringOn} disabled={isToggleDisabled}/>
+                <label className="form-check-label">Checked switch checkbox input</label>
+            </div>
         </div>
     );
 }
