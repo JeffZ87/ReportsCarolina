@@ -1,6 +1,5 @@
-import { queuedCourses } from './globals/queuedCourses';
+import { queuedCourses, reportsURL } from './globals/queuedCourses';
 import sendMessage from './gmail';
-import { reportsURL } from './globals/queuedCourses';
 
 export let isCourseMonitoringOn = false;
 export let isMonitoringCycleRunning = false;
