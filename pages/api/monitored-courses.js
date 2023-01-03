@@ -24,7 +24,7 @@ export default function handler(req, res) {
             break;
         default:
             console.error('Unexpected request type: ' + req.method);
-            res.status(405).end(`Method ${method} Not Allowed`);
+            res.status(405).end(`Method ${req.method} Not Allowed`);
             break;
     }
 }
