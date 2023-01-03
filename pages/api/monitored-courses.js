@@ -1,4 +1,4 @@
-import {queuedCourses} from '../../globals/queuedCourses'
+import { queuedCourses } from '../../globals/queuedCourses';
 
 export default function handler(req, res) {
     switch (req.method) {

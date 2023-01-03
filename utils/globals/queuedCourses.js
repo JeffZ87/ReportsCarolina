@@ -20,3 +20,5 @@ export let queuedCourses = [
         isClassOpen: false
     },
 ];
+
+export const reportsURL =  'https://reports.unc.edu/class-search/';

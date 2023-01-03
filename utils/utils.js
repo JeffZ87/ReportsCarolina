@@ -1,9 +1,9 @@
-import { queuedCourses } from '../globals/queuedCourses';
+import { queuedCourses } from './globals/queuedCourses';
 import sendMessage from './gmail';
+import { reportsURL } from './globals/queuedCourses';
 
 export let isCourseMonitoringOn = false;
 export let isMonitoringCycleRunning = false;
-const reportsURL =  'https://reports.unc.edu/class-search/';
 
 /**
  * Convert HTML String to DOM object.

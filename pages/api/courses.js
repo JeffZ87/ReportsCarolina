@@ -1,4 +1,4 @@
-import { getToken, searchClasses } from '../../utils/utils'
+import { getToken, searchClasses } from '../../utils/utils';
 
 /**
  * Courses available from reports.unc.edu.
