@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Navbar from '../components/navbar/navbar'
-import Search from '../components/searchbar/searchbar'
+import Searchbar from '../components/searchbar/searchbar'
 import MonitoredCourses from '../components/monitoredCourses/monitoredCourses'
 
 
@@ -18,10 +18,12 @@ export default function Home() {
         <div className='row'>
           <Navbar />
         </div>
+      </div>
 
+      <div className='container'>
         <div className='row'>
           <div className='col-8 bg-secondary'>
-            <Search />
+            <Searchbar />
           </div>
 
           <div className='col-4 bg-success'>
