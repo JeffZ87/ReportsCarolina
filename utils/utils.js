@@ -64,6 +64,10 @@ export async function searchClasses(csrfToken, searchParameter) {
     // extracting search results to class objects
     let resDom = textToDOM(await response.text())
     let classResultTable = resDom.window.document.getElementById('results-table');
+    // null check for no result
+    if (classResultTable == null) {
+        return resultClasses;
+    }
     let classTbody = classResultTable.querySelector('tbody');
     let classTrow = classTbody.querySelectorAll('tr');
     classTrow.forEach((row) => {
