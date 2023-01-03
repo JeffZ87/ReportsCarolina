@@ -1,6 +1,6 @@
 export default function sendMessage(message) {
-    const nodemailer = require("nodemailer");
-    const { google } = require("googleapis");
+    const nodemailer = require('nodemailer');
+    const { google } = require('googleapis');
     const OAuth2 = google.auth.OAuth2;
 
     const clientID = 'Your ClientID Here';
@@ -12,7 +12,7 @@ export default function sendMessage(message) {
     const oauth2Client = new OAuth2(
         clientID, // ClientID
         clientSecret, // Client Secret
-        "https://developers.google.com/oauthplayground" // Redirect URL
+        'https://developers.google.com/oauthplayground' // Redirect URL
     );
 
     oauth2Client.setCredentials({
@@ -21,10 +21,10 @@ export default function sendMessage(message) {
     const accessToken = oauth2Client.getAccessToken()
 
     const smtpTransport = nodemailer.createTransport({
-        service: "gmail",
+        service: 'gmail',
         auth: {
-            type: "OAuth2",
-            user: user, 
+            type: 'OAuth2',
+            user: user,
             clientId: clientID,
             clientSecret: clientSecret,
             refreshToken: refreshToken,
@@ -36,7 +36,7 @@ export default function sendMessage(message) {
     const mailOptions = {
         from: user,
         to: phoneGateway,
-        subject: "Class Status Update!",
+        subject: 'Class Status Update!',
         generateTextFromHTML: true,
         html: message
     };
