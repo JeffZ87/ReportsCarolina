@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Script from "next/script";
 
 export default function MonitoredCourses() {
 
-    const [isToggleDisabled, SetIsToggleDisabled] = useState(false);
+    const [isToggleDisabled, SetIsToggleDisabled] = useState(true);
     
-    const [isMonitoringOn, setIsMonitoringOn] = useState(async () => {
+    const [isMonitoringOn, setIsMonitoringOn] = useState(false);
+
+    useEffect(() => {
         SetIsToggleDisabled(true);
-        let response = await fetch('/api/monitor-status');
-        setIsMonitoringOn(await response.text() == 'true');
-        SetIsToggleDisabled(false);
-        
-    });
+        fetch('/api/monitor-status')
+        .then((res) => res.text()
+        .then((data) => {
+            setIsMonitoringOn(data == 'true');
+            SetIsToggleDisabled(false);
+        }));
+    }, [])
     
     const getMonitoredCourses = async () => {
         let response = await fetch('/api/monitored-courses');
