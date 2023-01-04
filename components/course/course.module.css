@@ -1,0 +1,27 @@
+.bg-unc-color {
+    background-color: #4B9CD3;
+}
+
+.btn-unc-color {
+    background-color: #4B9CD3;
+}
+
+.btn-unc-color:hover {
+    background-color: #468fc0;
+}
+
+.btn-success{
+    background-color: #198754;
+}
+
+.btn-danger{
+    background-color: #DC3545;
+}
+
+.btn-success:hover{
+    background-color: #198754;
+}
+
+.btn-danger:hover{
+    background-color: #DC3545;
+}
