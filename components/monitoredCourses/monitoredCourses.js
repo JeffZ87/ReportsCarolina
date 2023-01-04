@@ -13,8 +13,8 @@ export default function MonitoredCourses() {
         .then((res) => res.text()
         .then((data) => {
             setIsMonitoringOn(data == 'true');
-            SetIsToggleDisabled(false);
         }));
+        SetIsToggleDisabled(false);
     }, [])
     
     const getMonitoredCourses = async () => {
