@@ -33,7 +33,7 @@ export default function Home() {
       <div className='container'>
         <div className='row'>
           <div className='col-12 col-md-8'>
-            <SearchSection waitListListener={setWatchList}/>
+            <SearchSection watchList={watchList} setWatchList={setWatchList}/>
           </div>
 
           <div className='col-12 col-md-4 border border-dark mt-3'>

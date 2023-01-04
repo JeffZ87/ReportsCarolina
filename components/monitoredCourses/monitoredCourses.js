@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Course from '../course/course';
+import Image from 'next/image';
 
 export default function MonitoredCourses({ watchList, setWatchList}) {
     const [isToggleDisabled, SetIsToggleDisabled] = useState(true);
@@ -59,8 +60,8 @@ export default function MonitoredCourses({ watchList, setWatchList}) {
     return (
         <div className='container p-0'>
             <div className='row pt-2'>
-                <div className='col-sm-12 col-lg-6 d-flex justify-content-center px-0'>
-                    <button className='btn align-self-center' onClick={updateWatchList}><img src='/refresh.svg' /> Refresh</button>
+                <div className='col-sm-12 col-lg-6 d-flex justify-content-center'>
+                    <button className='btn align-self-center d-flex' onClick={updateWatchList}><Image className='align-self-center me-1' src='/refresh.svg' width={20} height={20} /> Refresh</button>
                 </div>
                 <div className='col-sm-12 col-lg-6 form-check form-switch d-flex justify-content-center'>
                     <input className='form-check-input align-self-center' type='checkbox' onChange={onChange} checked={isMonitoringOn} disabled={isToggleDisabled}/>
@@ -69,7 +70,7 @@ export default function MonitoredCourses({ watchList, setWatchList}) {
             </div>
             <hr />
             {watchList.map((course) => (
-            <Course courseObj={course} btnTxt='X' clickHandler={deleteMonitoredCourses} />
+            <Course key={course.classNumber} courseObj={course} btnTxt='X' clickHandler={deleteMonitoredCourses} />
             ))}
         </div>
     );
