@@ -7,7 +7,7 @@ import { getToken, searchClasses } from '../../utils/utils';
  */
 export default async function handler(req, res) {
   switch (req.method) {
-    case 'POST':
+    case 'POST':  // form submission for course search
       let csrfToken = await getToken();
       const searchParameter = req.body;
       let result = await searchClasses(csrfToken, searchParameter);

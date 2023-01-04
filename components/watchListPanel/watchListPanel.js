@@ -6,7 +6,7 @@ export default function WaitListPanel({ watchList, setWatchList}) {
     const [isToggleDisabled, SetIsToggleDisabled] = useState(true);
     
     const [isMonitoringOn, setIsMonitoringOn] = useState(false);
-
+    // check notification status 
     useEffect(() => {
         SetIsToggleDisabled(true);
         fetch('/api/monitor-status')
@@ -16,7 +16,7 @@ export default function WaitListPanel({ watchList, setWatchList}) {
             SetIsToggleDisabled(false);
         }));
     }, [])
-
+    // populate watch list
     useEffect(() => {
         fetch('/api/monitored-courses')
         .then((res) => res.json()

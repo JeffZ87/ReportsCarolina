@@ -96,7 +96,11 @@ export async function searchClasses(csrfToken, searchParameter) {
     return resultClasses
 }
 
-
+/**
+ * Update Course OPEN/CLOSE status for every class that's in the watch list.
+ * Notify user when one or more class status has changed
+ * @returns an updated watch-list courses
+ */
 export async function updateClassStatus() {
     let notifyClasses = [];
     let csrfToken = await getToken();
@@ -121,10 +125,11 @@ export async function updateClassStatus() {
     if (notifyClasses.length > 0) {
         notify(notifyClasses);
     }
-    return watchListCourses;
 }
 
-
+/**
+ * Initiate class monitoring. 
+ */
 export async function startClassMonitoring() {
     isCourseMonitoringOn = true;
     while (isCourseMonitoringOn) {
@@ -135,12 +140,18 @@ export async function startClassMonitoring() {
     isMonitoringCycleRunning = false;
 }
 
-
+/**
+ * Setter method for course monitoring.
+ * @param {*} isOn 
+ */
 export function setIsCourseMonitoringOn(isOn) {
     isCourseMonitoringOn = isOn;
 }
 
-
+/**
+ * Notify user of list of classes that has status changed.
+ * @param {*} classList list of classes to notify the user
+ */
 async function notify(classList) {
     let message = '';
     for (const course of classList) {
@@ -151,17 +162,15 @@ async function notify(classList) {
     sendMessage(message);
 }
 
-
+/**
+ * Update class status on a interval.
+ * @returns promise object when cycle complete
+ */
 async function classMonitoringCycle() {
-    // updateClassStatus();
-    // return new Promise((resolve) => {
-    //     setTimeout(() => {
-    //     }, 600000);
-    // });
     await updateClassStatus();
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve();
-        }, 10000);
+        }, 600000);
     });
 }

@@ -6,7 +6,7 @@ import SearchSection from '../components/searchSection/searchSection';
 
 export default function Home() {
   const [watchList, setWatchList] = useState([]);
-
+  // fetch watch list courses on load
   useEffect(() => {
     fetch('/api/monitored-courses')
     .then((res) => res.json()

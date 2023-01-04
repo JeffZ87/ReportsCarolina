@@ -2,12 +2,12 @@ import { startClassMonitoring, isCourseMonitoringOn, setIsCourseMonitoringOn, is
 
 export default function handler(req, res) {
     switch (req.method) {
-        case 'GET':
+        case 'GET':  // get notification status
             res.status(200).json(isCourseMonitoringOn);
             break;
 
-        case 'POST':
-            if (isCourseMonitoringOn == false && req.body == 'true' && !isMonitoringCycleRunning) {
+        case 'POST':  // update notification status
+            if (!isCourseMonitoringOn && req.body == 'true' && !isMonitoringCycleRunning) {
                 startClassMonitoring();
             }
             setIsCourseMonitoringOn(req.body == 'true');

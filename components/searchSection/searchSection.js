@@ -6,6 +6,7 @@ export default function SearchSection({ watchList, setWatchList }) {
     const [searchResult, setSearchResult] = useState([]);
 
     const addToWatchList = async(courseObj) => {
+        // prevent two same courses to be added to watch list
         let isCourseRepeated = false;
         for (const watchCourse of watchList) {
             if (watchCourse.classNumber == courseObj.classNumber) {
