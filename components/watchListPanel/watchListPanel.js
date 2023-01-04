@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Course from '../course/course';
 import Image from 'next/image';
 
-export default function MonitoredCourses({ watchList, setWatchList}) {
+export default function WaitListPanel({ watchList, setWatchList}) {
     const [isToggleDisabled, SetIsToggleDisabled] = useState(true);
     
     const [isMonitoringOn, setIsMonitoringOn] = useState(false);
@@ -32,7 +32,7 @@ export default function MonitoredCourses({ watchList, setWatchList}) {
         });
     };
 
-    const deleteMonitoredCourses = async (course) => {
+    const deleteWatchCourses = async (course) => {
         let classNumber = course.classNumber;
         let response = await fetch('/api/monitored-courses?classNumber=' + classNumber, {
             method: 'DELETE',
@@ -70,7 +70,7 @@ export default function MonitoredCourses({ watchList, setWatchList}) {
             </div>
             <hr />
             {watchList.map((course) => (
-            <Course key={course.classNumber} courseObj={course} btnTxt='X' clickHandler={deleteMonitoredCourses} />
+            <Course key={course.classNumber} courseObj={course} btnTxt='X' clickHandler={deleteWatchCourses} />
             ))}
         </div>
     );

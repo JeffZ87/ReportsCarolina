@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '../components/navbar/navbar';
-import MonitoredCourses from '../components/monitoredCourses/monitoredCourses';
+import WatchListPanel from '../components/WatchListPanel/watchListPanel';
 import SearchSection from '../components/searchSection/searchSection';
 
 export default function Home() {
@@ -38,7 +38,7 @@ export default function Home() {
 
           <div className='col-12 col-md-4 border border-dark mt-3'>
             <h1>Watch List</h1>
-            <MonitoredCourses watchList={watchList} setWatchList={setWatchList} />
+            <WatchListPanel watchList={watchList} setWatchList={setWatchList} />
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { queuedCourses, reportsURL } from './globals/queuedCourses';
+import { watchListCourses, reportsURL } from './globals/global';
 import sendMessage from './gmail';
 
 export let isCourseMonitoringOn = false;
@@ -100,7 +100,7 @@ export async function searchClasses(csrfToken, searchParameter) {
 export async function updateClassStatus() {
     let notifyClasses = [];
     let csrfToken = await getToken();
-    for (const queuedCourse of queuedCourses) {
+    for (const queuedCourse of watchListCourses) {
         let searchParam = {
             term: queuedCourse.term,
             subject: queuedCourse.subject,
@@ -121,7 +121,7 @@ export async function updateClassStatus() {
     if (notifyClasses.length > 0) {
         notify(notifyClasses);
     }
-    return queuedCourses;
+    return watchListCourses;
 }
 
 

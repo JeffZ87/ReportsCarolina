@@ -1,6 +1,6 @@
 // temporary solution to databases
 
-export let queuedCourses = [  
+export let watchListCourses = [  
     {
         classNumber: '5675',
         subject: 'COMP',
