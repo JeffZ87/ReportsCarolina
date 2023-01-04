@@ -14,7 +14,7 @@ export default function Course({ courseObj, btnTxt, clickHandler}) {
                 <p className={`btn my-auto align-self-center text-light ${courseObj.isClassOpen?`btn-success ${styles['btn-success']}`:`btn-danger ${styles['btn-danger']}`}`}>{courseObj.isClassOpen?'OPEN':'CLOSE'}</p>
             </div>
             <div className='my-1 col-sm-2'>
-                <button type='button' onClick={onClick} className={`btn ${styles['btn-unc-color']}`}>{btnTxt}</button>
+                <button type='button' onClick={onClick} className='btn btn-warning'>{btnTxt}</button>
             </div>
         </div>
     );
