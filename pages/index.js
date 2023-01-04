@@ -32,11 +32,12 @@ export default function Home() {
 
       <div className='container'>
         <div className='row'>
-          <div className='col-8'>
+          <div className='col-12 col-md-8'>
             <SearchSection waitListListener={setWatchList}/>
           </div>
 
-          <div className='col-4 bg-success'>
+          <div className='col-12 col-md-4 border border-dark mt-3'>
+            <h1>Watch List</h1>
             <MonitoredCourses watchList={watchList} setWatchList={setWatchList} />
           </div>
         </div>

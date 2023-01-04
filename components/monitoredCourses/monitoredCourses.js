@@ -70,7 +70,7 @@ export default function MonitoredCourses({ watchList, setWatchList}) {
             <hr />
             {watchList.map((course) => (
             <Course courseObj={course} btnTxt='X' clickHandler={deleteMonitoredCourses} />
-            ))};
+            ))}
         </div>
     );
 }
