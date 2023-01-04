@@ -1,10 +1,20 @@
-import Head from 'next/head'
-import Navbar from '../components/navbar/navbar'
-import Searchbar from '../components/searchbar/searchbar'
-import MonitoredCourses from '../components/monitoredCourses/monitoredCourses'
-
+import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import Navbar from '../components/navbar/navbar';
+import MonitoredCourses from '../components/monitoredCourses/monitoredCourses';
+import SearchSection from '../components/searchSection/searchSection';
 
 export default function Home() {
+  const [watchList, setWatchList] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/monitored-courses')
+    .then((res) => res.json()
+    .then((data) => {
+      setWatchList(data);
+    }));
+  }, [])
+
   return (
     <>
       <Head>
@@ -22,12 +32,12 @@ export default function Home() {
 
       <div className='container'>
         <div className='row'>
-          <div className='col-8 bg-secondary'>
-            <Searchbar />
+          <div className='col-8'>
+            <SearchSection waitListListener={setWatchList}/>
           </div>
 
           <div className='col-4 bg-success'>
-            <MonitoredCourses />
+            <MonitoredCourses watchList={watchList} setWatchList={setWatchList} />
           </div>
         </div>
       </div>
