@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
-import Script from "next/script";
+import { useState, useEffect } from 'react';
+import Course from '../course/course';
 
-export default function MonitoredCourses() {
-
+export default function MonitoredCourses({ watchList, setWatchList}) {
     const [isToggleDisabled, SetIsToggleDisabled] = useState(true);
     
     const [isMonitoringOn, setIsMonitoringOn] = useState(false);
@@ -13,49 +12,35 @@ export default function MonitoredCourses() {
         .then((res) => res.text()
         .then((data) => {
             setIsMonitoringOn(data == 'true');
+            SetIsToggleDisabled(false);
         }));
-        SetIsToggleDisabled(false);
     }, [])
+
+    useEffect(() => {
+        fetch('/api/monitored-courses')
+        .then((res) => res.json()
+        .then((data) => {
+          setWatchList(data);
+        }));
+      }, [])
     
-    const getMonitoredCourses = async () => {
+    const updateWatchList = async () => {
         let response = await fetch('/api/monitored-courses');
         response.json().then((res) => {
-            console.log(res);
+            setWatchList(res);
         });
     };
 
-    const deleteMonitoredCourses = async () => {
-        let classNumber = '5675'
+    const deleteMonitoredCourses = async (course) => {
+        let classNumber = course.classNumber;
         let response = await fetch('/api/monitored-courses?classNumber=' + classNumber, {
             method: 'DELETE',
         });
         response.json().then((res) => {
-            console.log(res);
+            setWatchList(res);
         });
     };
 
-    const addCourse = async () => {
-        let course = {
-            classNumber: '4926',
-            subject: 'ECON',
-            catalogNumber: '101',
-            sectionNumber: '001',
-            term: '2022 Fall',
-            instructor: 'Staub,Kalina Marie',
-            isClassOpen: false //if seats > 0 then class is open (true); false other wise
-        };
-        
-        let response = await fetch('/api/monitored-courses', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(course)
-        });
-        response.json().then((res) => {
-            console.log(res);
-        });
-    };
 
     const onChange = async (state) => {
         SetIsToggleDisabled(true);
@@ -64,7 +49,6 @@ export default function MonitoredCourses() {
             method: 'POST',
             body: checked
         });
-        console.log(await response.text());
         setIsMonitoringOn(checked);
         SetIsToggleDisabled(false);
     };
@@ -73,14 +57,20 @@ export default function MonitoredCourses() {
 
 
     return (
-        <div>
-            <button onClick={getMonitoredCourses}>monitored button</button>
-            <button onClick={deleteMonitoredCourses}>delete button</button>
-            <button onClick={addCourse}>add button</button>
-            <div className="form-check form-switch">
-                <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" onChange={onChange} checked={isMonitoringOn} disabled={isToggleDisabled}/>
-                <label className="form-check-label">Checked switch checkbox input</label>
+        <div className='container p-0'>
+            <div className='row pt-2'>
+                <div className='col-sm-12 col-lg-6 d-flex justify-content-center px-0'>
+                    <button className='btn align-self-center' onClick={updateWatchList}><img src='/refresh.svg' /> Refresh</button>
+                </div>
+                <div className='col-sm-12 col-lg-6 form-check form-switch d-flex justify-content-center'>
+                    <input className='form-check-input align-self-center' type='checkbox' onChange={onChange} checked={isMonitoringOn} disabled={isToggleDisabled}/>
+                    <label className='form-check-label align-self-center ps-1'>Notification</label>
+                </div>
             </div>
+            <hr />
+            {watchList.map((course) => (
+            <Course courseObj={course} btnTxt='X' clickHandler={deleteMonitoredCourses} />
+            ))};
         </div>
     );
 }
