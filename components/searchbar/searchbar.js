@@ -48,12 +48,12 @@ export default function Searchbar({ resultHandler }) {
             <div className='form-group'>
                 <label>Term<span className='text-danger'>*</span></label>
                 <input type='text' className='form-control' placeholder='Enter Term' name='term' required />
-                    <small id='emailHelp' className='form-text text-white'>2022 Spring, 2023 Fall, ...</small>
+                    <small id='emailHelp' className='form-text'>2022 Spring, 2023 Fall, ...</small>
             </div>
             <div className='form-group'>
                 <label>Subject<span className='text-danger'>*</span></label>
                 <input type='text' className='form-control' aria-describedby='emailHelp' placeholder='Enter Subject' name='subject' required />
-                    <small id='emailHelp' className='form-text text-white'>COMP, STOR, MATH, CHEM, ...</small>
+                    <small id='emailHelp' className='form-text'>COMP, STOR, MATH, CHEM, ...</small>
             </div>
             <div className='form-group'>
                 <label>Catalog Number<span className='text-danger'>*</span></label>
