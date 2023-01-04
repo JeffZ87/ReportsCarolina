@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '../components/navbar/navbar';
-import WatchListPanel from '../components/WatchListPanel/watchListPanel';
+import WatchListPanel from '../components/watchListPanel/watchListPanel';
 import SearchSection from '../components/searchSection/searchSection';
 
 export default function Home() {
