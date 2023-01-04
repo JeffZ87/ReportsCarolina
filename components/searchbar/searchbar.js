@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Searchbar() {
+export default function Searchbar({ resultHandler }) {
     const [isFormDisabled, setIsFormDisabled] = useState(false);
 
     const handleSubmit = async (event) => {
@@ -38,7 +38,7 @@ export default function Searchbar() {
         // Get the response data from server as JSON.
         // If server returns the name submitted, that means the form works.
         const result = await response.json();
-        console.log(result);
+        resultHandler(result);
         setIsFormDisabled(false);
     };
 
