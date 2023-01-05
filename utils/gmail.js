@@ -6,8 +6,9 @@ export default function sendMessage(message) {
     const clientID = 'Your ClientID Here';
     const clientSecret = 'Your Client Secret Here';
     const refreshToken = 'Your Refresh Token Here';
-    const user = 'Your Gmail Here';
-    const phoneGateway = 'phone-number@provider-gateway';
+    const userEmail = 'Your Gmail Here';
+    const targetEmail = 'Target Email to Send Notification';
+    // const targetEmail = 'phone-number@provider-gateway';
 
     const oauth2Client = new OAuth2(
         clientID, // ClientID
@@ -24,7 +25,7 @@ export default function sendMessage(message) {
         service: 'gmail',
         auth: {
             type: 'OAuth2',
-            user: user,
+            user: userEmail,
             clientId: clientID,
             clientSecret: clientSecret,
             refreshToken: refreshToken,
@@ -34,8 +35,8 @@ export default function sendMessage(message) {
     });
 
     const mailOptions = {
-        from: user,
-        to: phoneGateway,
+        from: userEmail,
+        to: targetEmail,
         subject: 'Class Status Update!',
         generateTextFromHTML: true,
         html: message
