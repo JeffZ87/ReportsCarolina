@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Documentation
 
-## Getting Started
+Status: Progress
 
-First, run the development server:
+# ReportsCarolina
+
+The name is inspired by the search system,  [reports.unc.edu](https://reports.unc.edu), which is fundamental to the functionality of ReportsCarolina.
+
+Class status monitoring system to alert the host user about class status changes for registration. Meant to be used during open-enrollment when waitlists are removed.
+
+# Setup and Run
+
+1. Installing project dependencies
+
+```bash
+npm install
+```
+
+1. Running development server
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Navigate to [http://localhost:300](http://localhost:300)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+# Setup for Notification
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+<aside>
+💡 Notification has to be turned on for auto class status checking
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+</aside>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Have a Gmail account available.
+2. Follow to this [guide](https://medium.com/@nickroach_50526/sending-emails-with-node-js-using-smtp-gmail-and-oauth2-316fe9c790a1) for Gmail access key setup.
+3. Navigate to gmail.js in project: /utils/gmail.js
+4. Input variable values
 
-## Learn More
+```jsx
+const clientID = 'Your ClientID Here';
+const clientSecret = 'Your Client Secret Here';
+const refreshToken = 'Your Refresh Token Here';
+const userEmail = 'Your Gmail Here';
+const targetEmail = 'Target Email to Send Notification';
+// const targetEmail = 'phone-number@provider-gateway';
+```
 
-To learn more about Next.js, take a look at the following resources:
+1. (Optional) Receive notification via SMS
+    1. For `targetEmail`, enter `phone-number@provider-gateway`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| AT&T | number@txt.att.net (SMS)
+number@mms.att.net (MMS) |
+| --- | --- |
+| Boost Mobile | number@smsmyboostmobile.com (SMS)
+number@myboostmobile.com (MMS) |
+| Cricket | number@sms.cricketwireless.net (SMS)
+number@mms.cricketwireless.net (MMS) |
+| Sprint | number@messaging.sprintpcs.com (SMS)
+number@pm.sprint.com (MMS) |
+| T-Mobile | number@tmomail.net (SMS and MMS) |
+| U.S. Cellular | number@email.uscc.net (SMS)
+number@mms.uscc.net( MMS) |
+| Verizon | number@vtext.com (SMS)
+number@vzwpix.com (MMS) |
+| Virgin Mobile | number@vmobl.com (SMS)
+number@vmpix.com (MMS) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Now you will receive SMS notification from your phone!
 
-## Deploy on Vercel
+# Developer’s Note
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[NextJS](https://nextjs.org/): quick development cycle with minimal backend code
+
+[JSDOM](https://github.com/jsdom/jsdom): covert HTML String to HTML DOM
+
+[Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/): efficient frontend development with integrated support for website responsiveness
+
+[nodemailer](https://nodemailer.com/about/): easy drafting of email alert message
+
+[googleapis](https://developers.google.com/gmail/api/guides): utilize Google APIs to achieve Email/SMS notification
+
+## Potential Updates
+
+- Fix issue with unique key in generated list
+    - Search Result and Watch List are generated list using list.map(), their key value is assigned with their respective class number. Therefore, when search result and watch list shows the same class item, NextJS will throw an error.
+    - Potential fixes: remove watch list class item from search result; find an alternative way to dynamically list classes
+- Integrate with Firebase for authentication and database
+    - Independent course watch lists
+- Allow end-user to input email (can be satisfied along with user auth)
+    - User defined target Email to send notification to
+- Fix bug with partial catalog number as search parameter
+    - Search COMP 45, result shows COMP 45 but in reality the underlying course is COMP 455
+    
+    ![BugScreenShot.png](/BugScreenShot.png)
+    
+    - searchClass() assigns catalog number based on input param instead of response; this cause catalog number to be mismatched with actual course catalog
+- Auto refresh of watchlist when class status changes
+    - Not a priority because the case is rare; user don’t leave the website open the entire time.
+    - Set up interval GET request
+- Error Handling
+    - Lack error handling code due to development time constraint
+    - Invalid googleapi credential handling
+    - Null / request body checking across APIs
+- Separate monitoring and notification
+    - Course status will not be updated unless notification is turned on
