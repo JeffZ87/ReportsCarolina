@@ -86,7 +86,7 @@ export async function searchClasses(csrfToken, searchParameter) {
         resultClass.catalogNumber = searchParameter.catalogNumber.toString();
         resultClass.sectionNumber = row.innerHTML.split('<!-- section number -->')[1].split('<td>')[1].split('</td>')[0];
         resultClass.term = row.innerHTML.split('<!-- term -->')[1].split('<td>')[1].split('</td>')[0];
-        resultClass.instructor = row.innerHTML.split('<!-- instructor name -->')[1].split('<td>')[1].split('</td>')[0];
+        resultClass.instructor = row.innerHTML.split('<!-- primary instructor name(s) -->')[1].split('<td>')[1].split('</td>')[0];
         let openSeatNum = row.innerHTML.split('<!-- available seats -->')[1].split('>')[1].split('<')[0];
         resultClass.isClassOpen = openSeatNum > 0;
 
